@@ -17,21 +17,23 @@ Two related questions about Atlanta daily high temperature data spanning 20 year
 ## The Approach
 
 **End of Summer Detection**  
-One-sided CUSUM applied to daily high temperatures, with a July-August baseline for each year. Hyperparameters were tuned across multiple combinations and selected for stability — consistent crossover years across threshold values mattered more than sensitivity. Unofficial end-of-summer dates were identified for each year, ranging from early September to mid-October.
+One-sided CUSUM applied to daily high temperatures, with a July-August baseline for each year. Hyperparameters were tuned across multiple combinations and selected for stability, where consistent crossover years across threshold values mattered more than sensitivity. Unofficial end-of-summer dates were identified for each year, ranging from early September to mid-October.
 
 **Summer Warming Trend**  
-CUSUM applied to annual mean summer temperatures against a 1996-1998 baseline. Nine hyperparameter combinations were tested. The threshold was crossed only in 2011 — an isolated spike that quickly returned below threshold.
+CUSUM applied to annual mean summer temperatures against a 1996-1998 baseline. Nine hyperparameter combinations were tested. The threshold was crossed only in 2011, an isolated spike that quickly returned below threshold.
 
 **Holt-Winters and CUSUM Combined**  
-Holt-Winters triple exponential smoothing applied to the full 20-year series to extract the seasonal component before running CUSUM. Removing short-term noise before change detection surfaces patterns that raw data alone may not clearly show. *(Results to be updated.)*
+Simple exponential smoothing was applied directly to the 20 end-of-summer dates from the CUSUM analysis (converted to day-of-year values), creating one observation per year rather than smoothing the raw daily temperature series. Alpha was set manually to 0.3 after the optimizer collapsed to near-zero (0.000066), which produced a near-constant output of ~263 for all years and made trend detection impossible.
+
+A linear regression model fit to the smoothed end-of-summer dates produced a slope of 0.088 days per year, R²=0.018, and p=0.588. CUSUM on the smoothed values crossed the threshold in only one of nine hyperparameter combinations, and only in the final year of the dataset. There is no statistical evidence that the unofficial end of summer has gotten later in Atlanta over the 1996-2015 period.
 
 ---
 
 ## Key Findings
 
-Summer mean temperatures showed no sustained warming trend in this 20-year dataset. The 2011 spike was real but isolated — the CUSUM statistic crossed the threshold and quickly returned, indicating a single anomalous year rather than a shift in the underlying pattern.
+Summer mean temperatures showed no sustained warming trend in this 20-year dataset. The 2011 spike was real but isolated. The CUSUM statistic crossed the threshold and quickly returned, indicating a single anomalous year rather than a shift in the underlying pattern.
 
-End-of-summer detection and the Holt-Winters combined analysis address the seasonal timing question from two different angles.
+The end-of-summer timing analysis reached the same conclusion from a different direction. Applying exponential smoothing to the annual end-of-summer dates and fitting a linear trend produced no statistically significant result (slope=0.088 days/year, R²=0.018, p=0.588). Both analyses point to the same answer: no meaningful trend in either summer temperatures or summer length is evident in this dataset over the 1996-2015 period.
 
 ---
 
@@ -40,3 +42,7 @@ End-of-summer detection and the Holt-Winters combined analysis address the seaso
 - CUSUM hyperparameter selection based on stability over sensitivity
 - Applying the same method to different questions with appropriate configurations
 - Combining exponential smoothing and change detection to separate signal from noise
+
+---
+
+*R code available upon request. As Georgia Tech OMSA coursework, it is not posted publicly out of respect for academic integrity for future students.*
