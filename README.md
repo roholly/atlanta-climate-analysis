@@ -41,7 +41,7 @@ The end-of-summer timing analysis reached the same conclusion from a different d
 
 This one was interesting for reasons beyond the methods. The unofficial end of summer is a genuinely compelling question. Official calendar dates don't reflect when temperatures actually stop feeling like summer, and the answer varies by nearly two months across the 20-year dataset. The 2011 spike was visually striking and worth investigating, but CUSUM correctly identified it as a single anomalous year rather than the start of something sustained.
 
-It also raises a legitimate question about the data itself: is 20 years enough to detect a meaningful climate trend? The results suggest probably not, which is itself a finding worth stating.
+Whether 20 years is enough to detect a meaningful climate trend is a fair question. The results here don't rule one out — they just don't find one in this dataset.
 
 ---
 
