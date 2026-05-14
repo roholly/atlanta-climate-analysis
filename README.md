@@ -39,9 +39,9 @@ The end-of-summer timing analysis reached the same conclusion from a different d
 
 ## What This Demonstrates
 
-- CUSUM hyperparameter selection based on stability over sensitivity
-- Applying the same method to different questions with appropriate configurations
-- Combining exponential smoothing and change detection to separate signal from noise
+This one was interesting for reasons beyond the methods. The unofficial end of summer is a genuinely compelling question. Official calendar dates don't reflect when temperatures actually stop feeling like summer, and the answer varies by nearly two months across the 20-year dataset. The 2011 spike was visually striking and worth investigating, but CUSUM correctly identified it as a single anomalous year rather than the start of something sustained.
+
+It also raises a legitimate question about the data itself: is 20 years enough to detect a meaningful climate trend? The results suggest probably not, which is itself a finding worth stating.
 
 ---
 
